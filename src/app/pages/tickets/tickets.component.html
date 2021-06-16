@@ -1,0 +1,28 @@
+
+<div style="display: flex;">
+
+    <table>
+        <td>
+            <div  style="display: grid;margin: 20px;">
+                <button style="margin: 5px; width: 250px;" type="button" class="btn btn-primary"  *ngFor='let boton of botones' (click)="traerResultado(boton)">{{boton.descripcion}}</button>
+            </div>
+        </td>
+        <td>
+            <div>
+                <h1>Respuestas</h1>
+                <button style="margin: 10px;" class="btn btn-secondary" (click)="changeExpand()" *ngIf="!this.expandido">Expandir Todo</button>
+                <button style="margin: 10px;" class="btn btn-danger" (click)="changeExpand()" *ngIf="this.expandido">Contraer todo</button>
+                <div  style="padding: 5px ;border: double;max-width: 1000px;" class="overflow-auto">
+
+                    <ngx-json-viewer  [expanded]="this.expandido" [json]="this.respuesta"></ngx-json-viewer>
+
+                </div>
+            </div>
+        </td>
+    </table>
+   
+    
+   
+
+</div>
+  
