@@ -6,7 +6,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 })
 export class TicketService {
 
-  private url="http://localhost:8080/ticket/";
+  private url="https://tp-mongodb.herokuapp.com/ticket/";
   constructor( private http: HttpClient ) { }
 
 

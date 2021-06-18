@@ -4,15 +4,14 @@
 
 export const environment = {
   production: false,
-  firebase: {
-    apiKey: "AIzaSyDe8L_M19DBdfVnMUujp6GHE1vXeb945MA",
-   authDomain: "primerchat-8a038.firebaseapp.com",
-   databaseURL: "https://primerchat-8a038.firebaseio.com",
-   projectId: "primerchat-8a038",
-   storageBucket: "primerchat-8a038.appspot.com",
-   messagingSenderId: "201522269225",
-   appId: "1:201522269225:web:e2bbcae7543049c8f6a038"
- }
+  firebaseConfig : {
+    apiKey: "AIzaSyDqqYnxSs9petOE_RJ1wFG_TNhxdbzdhfA",
+    authDomain: "mongodbfront.firebaseapp.com",
+    projectId: "mongodbfront",
+    storageBucket: "mongodbfront.appspot.com",
+    messagingSenderId: "925609533703",
+    appId: "1:925609533703:web:375efc7fafb3459ea3e5a2"
+  }
 };
 
 /*

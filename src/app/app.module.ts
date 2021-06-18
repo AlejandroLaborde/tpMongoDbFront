@@ -31,7 +31,7 @@ import { NgxJsonViewerModule } from 'ngx-json-viewer';
     AppRoutingModule,
     FormsModule,
     NgxJsonViewerModule,
-    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireModule.initializeApp(environment.firebaseConfig),
     HttpClientModule
     
   ],
