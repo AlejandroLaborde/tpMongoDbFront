@@ -8,16 +8,41 @@
             </div>
         </td>
         <td>
-            <div>
+            <div style="display: flex;">
                 <h1>Respuestas</h1>
                 <button style="margin: 10px;" class="btn btn-secondary" (click)="changeExpand()" *ngIf="!this.expandido">Expandir Todo</button>
                 <button style="margin: 10px;" class="btn btn-danger" (click)="changeExpand()" *ngIf="this.expandido">Contraer todo</button>
-                <div  style="padding: 5px ;border: double;max-width: 1000px;" class="overflow-auto">
-
-                    <ngx-json-viewer  [expanded]="this.expandido" [json]="this.respuesta"></ngx-json-viewer>
-
-                </div>
+                
+                <select *ngIf="this.ultimaEjecucion.link == 'type'"  [(ngModel)]="selectedOptionType" (change)="getTicketTypeParametros()" style="margin: 10px;"  class="form-select" aria-label="Default select example">
+                    <option selected>Select type</option>
+                    <option value="all">all</option>
+                    <option value="desperfecto">desperfecto</option>
+                    <option value="cambioPlan">cambioPlan</option>
+                    <option value="baja">baja</option>
+                    <option value="alta">alta</option>
+                </select>
             </div>
+            <div *ngIf="this.ultimaEjecucion.link == 'type'"  style="margin: 5px;display: flex; align-items: center;">
+                <h6>Date From</h6>
+                <input (change)="getTicketTypeParametros()" [(ngModel)]="dateFrom" type="datetime-local" id="birthdaytime" name="birthdaytime">
+                <h6>Date To</h6>
+                <input (change)="getTicketTypeParametros()" [(ngModel)]="dateTo" type="datetime-local" id="birthdaytime" name="birthdaytime">
+            </div>
+
+            <div *ngIf="this.ultimaEjecucion.link == '/' || this.ultimaEjecucion.link == 'cadaCuanto' || this.ultimaEjecucion.link == 'findClosedTickets' || this.ultimaEjecucion.link == 'findOpenTickets' " style="margin: 5px;display: flex; align-items: center;">
+                <h6>Date From</h6>
+                <input (change)="filtrarPorFechas()" [(ngModel)]="dateFrom" type="datetime-local" id="birthdaytime" name="birthdaytime">
+                <h6>Date To</h6>
+                <input (change)="filtrarPorFechas()" [(ngModel)]="dateTo" type="datetime-local" id="birthdaytime" name="birthdaytime">
+            </div>
+
+        
+            <div *ngIf="!(respuesta =='...')" style="padding: 5px ;border: double;max-width: 1000px;" class="overflow-auto">
+                <ngx-json-viewer  [expanded]="this.expandido" [json]="this.respuesta"></ngx-json-viewer>
+            </div>
+            <div  *ngIf="(respuesta =='...')" class="alert alert-danger" role="alert">
+                No se encontraron resultados
+              </div>
         </td>
     </table>
    

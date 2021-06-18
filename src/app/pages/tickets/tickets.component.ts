@@ -1,3 +1,4 @@
+import { HttpParams } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { TicketService } from 'src/app/servicios/ticket.service';
 
@@ -10,10 +11,23 @@ export class TicketsComponent implements OnInit {
 
   public respuesta:any = "...";
   public expandido = false;
-  private ultimaEjecucion = null;
+  public selectedOptionType = "Select type"
+  public ultimaEjecucion = {descripcion:null,link:null}
+  public dateTo:any;
+  public dateFrom:any;
   constructor( private ticketService: TicketService ) { }
 
   ngOnInit(): void {
+
+    var parametros = {typo: "sasdas", dateTo:"2021", dateFrom:"asd"}
+    for (const key in parametros) {
+      if (Object.prototype.hasOwnProperty.call(parametros, key)) {
+        console.log(key)
+        const i :string = key + "";
+        console.log( parametros['dateFrom'] )
+      }
+    }
+
    
   }
 
@@ -29,7 +43,7 @@ export class TicketsComponent implements OnInit {
     },
     {
       descripcion:"Obtiene los tickets por tipo",
-      link:"type?type=cambioPlan",
+      link:"type",
     },
     {
       descripcion:"Que usuario atiende mas tickets",
@@ -69,13 +83,45 @@ export class TicketsComponent implements OnInit {
   traerResultado(boton : any){
     this.ticketService.callMethod(boton.link).then((datos : any)=>{
       datos.subscribe((response:any)=>{
+        this.dateFrom = undefined;
+        this.dateTo = undefined;
+        this.ultimaEjecucion = boton;
         this.respuesta = response
       })
     });
   }
 
+  getTicketTypeParametros(){
+    const params = new HttpParams().set("type",this.selectedOptionType).set("dateTo",this.dateTo.toString()).set("dateFrom",this.dateFrom.toString());
+    this.ticketService.callMethod(this.ultimaEjecucion.link, params).then((datos : any)=>{
+      datos.subscribe((response:any)=>{
+        if(response.length == 0){
+          this.respuesta = "...";
+        }else{
+          this.respuesta = response
+        }
+      })
+    });
+  }
+
+  filtrarPorFechas(){
+    const params = new HttpParams().set("dateTo",this.dateTo.toString()).set("dateFrom",this.dateFrom.toString());
+    this.ticketService.callMethod(this.ultimaEjecucion.link, params).then((datos : any)=>{
+      datos.subscribe((response:any)=>{
+        if(response.length == 0){
+          this.respuesta = "...";
+        }else{
+          this.respuesta = response
+        }
+      })
+    });
+  }
+
+  
+
   changeExpand(){
     this.expandido = !this.expandido;
   }
+
 
 }
