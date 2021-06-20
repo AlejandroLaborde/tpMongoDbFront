@@ -76,6 +76,10 @@ export class TicketsComponent implements OnInit {
     {
       descripcion:"Empleado que genero tickets",
       link:"findEmpleadoTicket",
+    },
+    {
+      descripcion:"Cliente Cercano a Central",
+      link:"clienteMasCercanoACentroAtencion",
     }
 
   ]
